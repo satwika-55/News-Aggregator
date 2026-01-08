@@ -8,6 +8,11 @@ from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFoun
 from youtube_transcript_api.proxies import WebshareProxyConfig
 
 
+# This file first uses YouTube RSS feeds to find videos,
+# and then uses the YouTube Transcript
+# API to read the video content.
+
+
 class Transcript(BaseModel):
     text: str
 
@@ -19,6 +24,17 @@ class ChannelVideo(BaseModel):
     published_at: datetime
     description: str
     transcript: Optional[str] = None
+
+# YouTube Channel
+#    ↓
+# RSS Feed (find videos)
+#    ↓
+# Extract video ID
+#    ↓
+# Transcript API (read speech)
+#    ↓
+# Clean structured data
+
 
 
 class YouTubeScraper:
